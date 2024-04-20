@@ -1,0 +1,22 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KolekcjeJKProba2.Kontrolki.KontrolkaPrzedmiotu">
+    <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding idKolekcja, StringFormat='| Id: {0}'}" Grid.Row="0" Grid.Column="0"></Label>
+            <Label Text="{Binding nazwaPrzedmiotu, StringFormat='| Nazwa przedmiotu: {0}'}" Grid.Row="0" Grid.Column="1"></Label>
+            <Label Text="{Binding iloscPrzedmiotu, StringFormat='| Ilość: {0}'}" Grid.Row="0" Grid.Column="2"></Label>
+        </Grid>
+        <BoxView BackgroundColor="White" HeightRequest="1"/>
+    </StackLayout>
+
+</ContentView>

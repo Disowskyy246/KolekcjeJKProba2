@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KolekcjeJKProba2.MainPage">
+
+    <StackLayout>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Entry Grid.Column="0" x:Name="textInput" Placeholder="Wprowadź tekst"/>
+            <Button Grid.Column="1" Text="Dodaj" Clicked="Dodaj_Clicked"/>
+        </Grid>
+        <ScrollView>
+            <CollectionView x:Name="wyswietlenieKolekcji" SelectionMode="Single">
+                 <CollectionView.ItemTemplate>
+                      <DataTemplate>
+                        <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding nazwaKolekcji}" MinimumWidthRequest="300" Padding="20" HorizontalTextAlignment="Center"></Label>
+                                <Button Text="Detale" MinimumWidthRequest="300" Clicked="Wyswietl_Clicked" Padding="20"></Button>
+                                <Button Text="Edytuj" Clicked="Edytuj_Clicked" MinimumWidthRequest="100"/>
+                                <Button Text="X" MinimumWidthRequest="50" Clicked="Usun_Clicked" Padding="20" TextColor="Red" FontAttributes="Bold"></Button>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                      </DataTemplate>
+                  </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </StackLayout>
+
+</ContentPage>
