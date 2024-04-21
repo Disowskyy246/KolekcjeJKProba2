@@ -12,14 +12,29 @@ namespace KolekcjeJKProba2
         public MainPage()
         {
             InitializeComponent();
+
+            // Ścieżka do folderu
             sciezkaDoFolderu = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Kolekcje");
+
+            // Sprawdzenie czy folder istnieje, jeśli nie, utwórz go
+            if (!Directory.Exists(sciezkaDoFolderu))
+            {
+                Directory.CreateDirectory(sciezkaDoFolderu);
+            }
+
             Wczytaj_Kolekcje();
-            Debug.WriteLine("\n Ścieżka do folderu: "+sciezkaDoFolderu+"\n");
         }
 
         private async void Dodaj_Clicked(object sender, EventArgs e)
         {
             var nazwaKolekcji = textInput.Text;
+
+            if (string.IsNullOrWhiteSpace(nazwaKolekcji)) // Sprawdź, czy nazwa kolekcji jest pusta lub zawiera tylko białe znaki
+            {
+                await DisplayAlert("Błąd", "Nazwa kolekcji nie może być pusta", "OK");
+                return;
+            }
+
             var sciezkaDoPliku = Path.Combine(sciezkaDoFolderu, $"{nazwaKolekcji}.txt");
 
             if (File.Exists(sciezkaDoPliku))
@@ -41,6 +56,7 @@ namespace KolekcjeJKProba2
         }
 
 
+
         private void Wczytaj_Kolekcje()
         {
             kolekcje.Clear(); // Wyczyść kolekcję przed ponownym wczytaniem, aby uniknąć duplikatów
@@ -56,7 +72,7 @@ namespace KolekcjeJKProba2
 
         private async Task<bool> SprawdzNazweKolekcji(string nazwa)
         {
-            var znakiSpecjalne = new char[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|', ',', '.', '!', '@', '#', '$', '%', '^', '*', '(', ')', '`', '"', '~', '-', '+', '=', ' ' };
+            var znakiSpecjalne = new char[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|', ',', '.', '!', '@', '#', '$', '%', '^', '*', '(', ')', '`', '"', '~', '-', '+', '=', ' ',};
 
             if (nazwa.IndexOfAny(znakiSpecjalne) != -1)
             {
